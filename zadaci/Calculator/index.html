@@ -9,34 +9,31 @@
 <body>
 
    <script>
-    // program for a simple calculator
+ 
+    let prviBroj = parseFloat(prompt('Unesite prvi broj: '));
+    const operacija = prompt('Unesite matematicku operaciju: ');
+    let drugiBroj = parseFloat(prompt('Unesite drugi broj: '));
 
-// take the operator input
+    let rezultat;
 
+    if(!operacija){
+    rezultat="Niste uneli operaciju" }
 
-// take the operand input
-const number1 = parseFloat(prompt('Enter first number: '));
-const operator = prompt('Enter operator ( either +, -, * or / ): ');
-const number2 = parseFloat(prompt('Enter second number: '));
+    else if (operacija == '+') {
+    rezultat = prviBroj + drugiBroj;
+    }
 
-let result;
+    else if (operacija == '-') {
+    rezultat = prviBroj - drugiBroj;
+    }
+    else if (operacija == '*') {
+    rezultat = prviBroj * drugiBroj;
+    }
+    else {
+    rezultat = prviBroj / drugiBroj;
+    }
 
-// using if...else if... else
-if (operator == '+') {
-    result = number1 + number2;
-}
-else if (operator == '-') {
-    result = number1 - number2;
-}
-else if (operator == '*') {
-    result = number1 * number2;
-}
-else {
-    result = number1 / number2;
-}
-
-// display the result
-alert(`${number1} ${operator} ${number2} = ${result}`);
+    alert(rezultat);
    </script>
 </body>
 </html>
