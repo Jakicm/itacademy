@@ -11,13 +11,22 @@
    <script>
  
     let prviBroj = parseFloat(prompt('Unesite prvi broj: '));
-    const operacija = prompt('Unesite matematicku operaciju: ');
+    const operacija = prompt('Unesite matematicku operaciju: +, -, *, /');
     let drugiBroj = parseFloat(prompt('Unesite drugi broj: '));
 
     let rezultat;
 
     if(!operacija){
-    rezultat="Niste uneli operaciju" }
+        rezultat = "Niste uneli operaciju"; 
+    }
+
+    else if (!prviBroj) {
+        rezultat = "Niste uneli prvi broj"; 
+    }
+    
+    else if (!drugiBroj) {
+    rezultat = "Niste uneli drugi broj";
+    }
 
     else if (operacija == '+') {
     rezultat = prviBroj + drugiBroj;
@@ -26,14 +35,17 @@
     else if (operacija == '-') {
     rezultat = prviBroj - drugiBroj;
     }
+
     else if (operacija == '*') {
     rezultat = prviBroj * drugiBroj;
     }
+
     else {
     rezultat = prviBroj / drugiBroj;
     }
 
     alert('Dobijena vrednost: ' + rezultat);
+
    </script>
 </body>
 </html>
