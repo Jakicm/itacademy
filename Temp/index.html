@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age">
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <script>
+        // Get the form element
+        let users = [
+  { id: 1, name: 'John', age: 30 },
+  { id: 2, name: 'Jane', age: 25 },
+  { id: 3, name: 'Jim', age: 35 },
+];
+
+// Create
+function createUser(name, age) {
+  let id = users.length + 1;
+  let user = { id, name, age };
+  users.push(user);
+  return user;
+}
+
+// Get the form element
+let form = document.querySelector('form');
+
+// Handle the form submit event
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  // Get the form data
+  let name = form.elements.name.value;
+  let age = form.elements.age.value;
+
+  // Call the createUser function with the form data
+  let user = createUser(name, age);
+  console.log(user);
+});
+      </script>
+      
+</body>
+</html>
