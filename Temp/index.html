@@ -6,54 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    
-    <form>
-        <div>
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name">
-        </div>
-        <div>
-          <label for="age">Age:</label>
-          <input type="number" id="age" name="age">
-        </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+<html>
+  <head>
+    <style>
+      .circle {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #55fb9f, #b97aff, #fb5dad);
+        animation: rotate 2s linear infinite, glow 2s ease-in-out infinite alternate;
+      }
 
-      <script>
-        // Get the form element
-        let users = [
-  { id: 1, name: 'John', age: 30 },
-  { id: 2, name: 'Jane', age: 25 },
-  { id: 3, name: 'Jim', age: 35 },
-];
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-// Create
-function createUser(name, age) {
-  let id = users.length + 1;
-  let user = { id, name, age };
-  users.push(user);
-  return user;
-}
+      @keyframes glow {
+        from {
+          box-shadow: 0 0 10px blue;
+        }
+        to {
+          box-shadow: 0 0 20px blue;
+        }
+        to {
+          box-shadow:0 0 30px #55fb9f;
+        }
+      }
 
-// Get the form element
-let form = document.querySelector('form');
 
-// Handle the form submit event
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  // Get the form data
-  let name = form.elements.name.value;
-  let age = form.elements.age.value;
-
-  // Call the createUser function with the form data
-  let user = createUser(name, age);
-  console.log(user);
-});
-      </script>
       
-</body>
+      .inner-circle {
+        width: 275px;
+        height: 275px;
+        border-radius: 50%;
+        background-color: #050210;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+       animation: pulseAnimate 4s ease-out infinite;
+        
+        
+      }
+      
+      @keyframes pulseAnimate { 100% {
+        opacity: 1;
+        transform: scale(2);
+      }
+
+      }
+     
+      
+     
+      
+     
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="circle">
+      <div class="inner-circle"></div>
+    </div>
+  </body>
 </html>
+
+
+

@@ -1,0 +1,50 @@
+html, body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #050210;
+
+}
+
+.circle {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    background: linear-gradient(#fb5dad, #55fb9f, #b97aff);
+    animation: rotate 1s linear infinite, glow .5s linear 1s infinite alternate;
+    
+
+}
+
+@keyframes rotate {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 10px #fb5dad;
+    }
+    to {
+      box-shadow: 0 0 20px #55fb9f;
+    }
+    to {
+      box-shadow:0 0 30px #b97aff;
+    }
+  }
+
+.inner-circle {
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    line-height: 270px;
+    background: #050210;
+    border-radius: 50%;
+    
+    
+    
+    
+}
+
