@@ -29,6 +29,7 @@ a[href^="https://www.google.com/"] {
     color: red;
   }
 
+
   p:nth-child(8):hover {
     font-style: italic;
   }
