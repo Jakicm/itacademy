@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodovi</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div id="flexbox1">
+    <div id="enterDetails" style="order: 3;">
+        <h1>Unesite podatke:</h1>
+
+        <h4>Broj</h4> 
+        <input id="enterID" type="text"> 
+
+        <h4>Ime i Prezime</h4> 
+        <input id="enterName" type="text"> 
+
+        <h4>Bodovi</h4> 
+        <input id="enterAge" type="number">
+
+        <br><br>
+
+        <button id="insert">Dodaj</button>
+        <button id="update">Proknjiži</button>
+        <button id="remove">Obriši</button> <br><br>
+    </div>
+    <br>
+    <div id="findDetails" style="order: 1;">
+        <h1>Pretraga po broju kartice:</h1>
+        <h4>Br. kartice</h4>
+        <input id="findID" type="text"> <br><br>
+        <button id="find">Prikaz</button>
+        <h3 id="findName" type="text"></h3>
+        <h3 id="findAge" type="number"></h3> <br><br>
+    </div>
+
+<div id="findDetails" style="order: 2;">
+<label for="num1">Početno stanje:</label>
+<input type="number" id="num1" name="num1">
+<br>
+<label for="num2">Račun:</label>
+<input type="number" id="num2" name="num2">
+<br>
+<button onclick="sum()">Računaj</button>
+
+<p id="result"></p>
+</div>
+
+</div>
+    
+
+    <script>
+  function sum() {
+  const num1 = document.getElementById("num1").value;
+  const num2 = document.getElementById("num2").value;
+  const result = Number(num1) - Number(num2);
+  document.getElementById("result").innerHTML = "Preostalo: " + result;
+  }
+    </script>
+    
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+     // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyBASUXjjXa6qUZbDKxTNwNJyNcCpzn1RVw",
+    authDomain: "bodovi-89d51.firebaseapp.com",
+    databaseURL: "https://bodovi-89d51-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "bodovi-89d51",
+    storageBucket: "bodovi-89d51.appspot.com",
+    messagingSenderId: "725302972793",
+    appId: "1:725302972793:web:e65e49fb4b7bf35e061fa8"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+        //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
+        //Copy and paste the CDN bit of code from your app that you created on Firebase.
+        //The script tag above is already there, so careful not to have duplicate script tags.
+        //After you've copied and pasted, just delete the unnecessary script tags. 
+   
+
+        import {getDatabase, ref, get, set, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+        //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+        // (the one where you imported "initializeApp" from),
+        //but change "firebase-app" to "firebase-database"
+        
+
+        const db = getDatabase();
+
+        var enterID = document.querySelector("#enterID");
+        var enterName = document.querySelector("#enterName");
+        var enterAge = document.querySelector("#enterAge");
+        var findID = document.querySelector("#findID");
+        var findName = document.querySelector("#findName");
+        var findAge = document.querySelector("#findAge");
+      
+
+        var insertBtn = document.querySelector("#insert");
+        var updateBtn = document.querySelector("#update");
+        var removeBtn = document.querySelector("#remove");
+        var findBtn = document.querySelector("#find");
+
+        
+
+        function InsertData() {
+            set(ref(db, "People/"+ enterID.value),{
+                Name: enterName.value,
+                ID: enterID.value,
+                Age: enterAge.value
+            })
+            .then(()=>{
+                alert("Uspešno je dodato");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+        }
+
+     function FindData() {
+            const dbref = ref(db);
+
+            get(child(dbref, "People/" + findID.value))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    findName.innerHTML = "Ime i prezime: " + snapshot.val().Name;
+                    findAge.innerHTML = "Bodovi: " + snapshot.val().Age;
+                } else {
+                    alert("Radnik nije pronadjen");
+                }
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+            
+        } 
+
+
+        function UpdateData(){
+            update(ref(db, "People/"+ enterID.value),{
+                //Name: enterName.value,
+                Age: enterAge.value
+            })
+            .then(()=>{
+                alert("Račun je proknjižen");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+        }
+
+        function RemoveData(){
+            remove(ref(db, "People/"+ enterID.value))
+            .then(()=>{
+                alert("Data deleted successfully");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+        }
+
+
+        insertBtn.addEventListener('click', InsertData);
+        updateBtn.addEventListener('click', UpdateData);
+        removeBtn.addEventListener('click', RemoveData);
+        findBtn.addEventListener('click', FindData);
+
+        
+      </script>
+</body>
+</html>
