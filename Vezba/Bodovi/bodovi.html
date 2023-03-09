@@ -16,17 +16,16 @@
         <h4>Broj</h4> 
         <input id="enterID" type="text"> 
 
-        <h4>Ime i Prezime</h4> 
-        <input id="enterName" type="text"> 
+        
 
         <h4>Bodovi</h4> 
         <input id="enterAge" type="number">
 
         <br><br>
 
-        <button id="insert">Dodaj</button>
+        
         <button id="update">Proknjiži</button>
-        <button id="remove">Obriši</button> <br><br>
+        
     </div>
     <br>
     <div id="findDetails" style="order: 1;">
@@ -91,16 +90,16 @@
         const db = getDatabase();
 
         var enterID = document.querySelector("#enterID");
-        var enterName = document.querySelector("#enterName");
+        
         var enterAge = document.querySelector("#enterAge");
         var findID = document.querySelector("#findID");
         var findName = document.querySelector("#findName");
         var findAge = document.querySelector("#findAge");
       
 
-        var insertBtn = document.querySelector("#insert");
+        
         var updateBtn = document.querySelector("#update");
-        var removeBtn = document.querySelector("#remove");
+       
         var findBtn = document.querySelector("#find");
 
         function InsertData() {
@@ -158,9 +157,9 @@
             });
         }
 
-        insertBtn.addEventListener('click', InsertData);
+        
         updateBtn.addEventListener('click', UpdateData);
-        removeBtn.addEventListener('click', RemoveData);
+        
         findBtn.addEventListener('click', FindData);
 
       </script>

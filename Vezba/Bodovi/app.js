@@ -1,63 +1,39 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyC-WS8TR3HV5Sdq3tpHmokrtH6efH4hyt0",
-    authDomain: "bodovi.firebaseapp.com",
-    databaseURL: "https://bodovi-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "bodovi",
-    storageBucket: "bodovi.appspot.com",
-    messagingSenderId: "772694096270",
-    appId: "1:772694096270:web:62debf6e150014b8750cdf"
-  };
-  firebase.initializeApp(config);
-  // Get a reference to the database service
-  var database = firebase.database();
-  var dataRef = database.ref("data");
-// Add data to the database
-function addData() {
-    var firstname = document.getElementById("firstname").value;
-    var secondname = document.getElementById("secondname").value;
-    var id = document.getElementById("id").value;
-    var score = document.getElementById("score").value;
-  
-    dataRef.push({
-      firstname: firstname,
-      secondname: secondname,
-      id: id,
-      score: score
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+import {getDatabase, ref, get, set, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyBASUXjjXa6qUZbDKxTNwNJyNcCpzn1RVw",
+          authDomain: "bodovi-89d51.firebaseapp.com",
+          databaseURL: "https://bodovi-89d51-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "bodovi-89d51",
+          storageBucket: "bodovi-89d51.appspot.com",
+          messagingSenderId: "725302972793",
+          appId: "1:725302972793:web:e65e49fb4b7bf35e061fa8"
+        };
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+
+const peopleTable = document.querySelector("#peopleTable");
+
+function listPeople() {
+  get(ref(db, "People")).then((snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      const person = childSnapshot.val();
+      const row = document.createElement("tr");
+      const idCell = document.createElement("td");
+      const nameCell = document.createElement("td");
+      const ageCell = document.createElement("td");
+      idCell.textContent = person.ID;
+      nameCell.textContent = person.Name;
+      ageCell.textContent = person.Age;
+      row.appendChild(idCell);
+      row.appendChild(nameCell);
+      row.appendChild(ageCell);
+      peopleTable.appendChild(row);
     });
-  }
-  
-  // Update data in the database
-  function updateData() {
-    var id = document.getElementById("id").value;
-    var newScore = document.getElementById("score").value;
-  
-    dataRef.orderByChild("id").equalTo(id).once("value", function(snapshot) {
-      snapshot.forEach(function(child) {
-        child.ref.update({
-          score: newScore
-        });
-      });
-    });
-  }
-  
-  // Delete data from the database
-  function deleteData() {
-    var id = document.getElementById("id").value;
-  
-    dataRef.orderByChild("id").equalTo(id).once("value", function(snapshot) {
-      snapshot.forEach(function(child) {
-        child.ref.remove();
-      });
-    });
-  }
-  
-  // Get all data from the database
-  function getAllData() {
-    dataRef.on("value", function(snapshot) {
-      snapshot.forEach(function(child) {
-        console.log(child.val());
-      });
-    });
-  }
-    
+  });
+}
+
+listPeople();

@@ -91,3 +91,10 @@ input[type="number"] {
   font-size: 18px;
   margin-top: 10px;
 }
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 18px;
+}

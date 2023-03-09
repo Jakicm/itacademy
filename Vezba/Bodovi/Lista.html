@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Radnici</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #eee;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="search" placeholder="Search...">
+    <table id="peopleTable">
+      <thead>
+        <tr>
+          <th>Ime i prezime</th>
+          <th> Br. kartice</th>
+          <th>Br. bodova</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
+    <script>
+      const search = document.getElementById('search');
+      const tableRows = document.getElementsByTagName('tr');
+
+      search.addEventListener('keyup', function () {
+        const searchTerm = search.value.toLowerCase();
+
+        for (let i = 1; i < tableRows.length; i++) {
+          const rowCells = tableRows[i].getElementsByTagName('td');
+          let found = false;
+          for (let j = 0; j < rowCells.length; j++) {
+            const cellText = rowCells[j].innerText.toLowerCase();
+            if (cellText.includes(searchTerm)) {
+              found = true;
+              break;
+            }
+          }
+          if (found) {
+            tableRows[i].style.display = '';
+          } else {
+            tableRows[i].style.display = 'none';
+          }
+        }
+      });
+
+    </script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+      import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+      const firebaseConfig = {
+    apiKey: "AIzaSyBASUXjjXa6qUZbDKxTNwNJyNcCpzn1RVw",
+    authDomain: "bodovi-89d51.firebaseapp.com",
+    databaseURL: "https://bodovi-89d51-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "bodovi-89d51",
+    storageBucket: "bodovi-89d51.appspot.com",
+    messagingSenderId: "725302972793",
+    appId: "1:725302972793:web:e65e49fb4b7bf35e061fa8"
+  };
+
+      const app = initializeApp(firebaseConfig);
+
+      const db = getDatabase();
+
+      const peopleTable = document.querySelector("#peopleTable tbody");
+
+      onValue(ref(db, "People"), (snapshot) => {
+        peopleTable.innerHTML = "";
+
+        snapshot.forEach((childSnapshot) => {
+          const person = childSnapshot.val();
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${person.Name}</td>
+            <td>${person.ID}</td>
+            <td>${person.Age}</td>
+          `;
+          peopleTable.appendChild(row);
+        });
+      });
+
+    </script>
+  </body>
+</html>
