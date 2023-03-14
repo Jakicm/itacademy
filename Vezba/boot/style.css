@@ -1,0 +1,11 @@
+.line-over-page::before {
+    content: "";
+    display: block;
+    border-top: 1px solid gray;
+    margin-bottom: 20px;
+  }
+
+  ul.list-unstyled li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
