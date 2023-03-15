@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap Example</title>
-    <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">
+    <div class="container bg-light">
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">My Website</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,46 +26,58 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
           </ul>
         </div>
       </nav>
-      <div class="jumbotron" style="background-image: url('./images/hero.jpg'); background-repeat: no-repeat; height: 450px;">
+      <div class="jumbotron" style="background-image: url('./images/hero.jpg'); background-size: contain;  background-repeat: no-repeat; height: 400px;">
             <h5 class="bg-success d-inline-block text-center text-white">We strive to make all of our creations exqusite</h5>
          </div>
          <div class="container">
           <h5>RECENT WORK</h5>
           <div class="line-over-page">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-12 col-sm-12">
               <div class="card-body text-center">
-                <img class="card-img-top" style="width: 60px; height: 60px;" src="./images/icon-1.png" alt="Bike">
+                <img class="card-img-top-ico"  src="./images/icon-1.png" alt="Bike">
                 <div class="card-body">
                   <h5 class="card-title">Image 1 Title</h5>
                   <p class="card-text">Some description about Image 1.</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="card">
-                <img class="card-img-top" style="width: 60px; height: 60px;" src="./images/icon-2.png" alt="Surf">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+              <div class="card-body text-center">
+                <img class="card-img-top-ico" src="./images/icon-2.png" alt="Surf">
                 <div class="card-body">
                   <h5 class="card-title">Image 2 Title</h5>
                   <p class="card-text">Some description about Image 2.</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="card">
-                <img class="card-img-top" src="./images/hills-400x340.jpg" alt="Image 3">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+              <div class="card-body text-center">
+                <img class="card-img-top-ico" src="./images/icon-3.png" alt="Image 3">
                 <div class="card-body">
                   <h5 class="card-title">Image 3 Title</h5>
                   <p class="card-text">Some description about Image 3.</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="card">
-                <img class="card-img-top" src="./images/path-400x340.jpg" alt="Image 4">
+            <div class="col-lg-3 col-md-12 col-sm-12">
+              <div class="card-body text-center">
+                <img class="card-img-top-ico" src="./images/icon-4.png" alt="Image 4">
                 <div class="card-body">
                   <h5 class="card-title">Image 4 Title</h5>
                   <p class="card-text">Some description about Image 4.</p>
@@ -80,7 +92,7 @@
             <h5>RECENT WORK</h5>
             <div class="line-over-page">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                   <img class="card-img-top" src="./images/bike-400x340.jpg" alt="Bike">
                   <div class="card-body">
@@ -89,7 +101,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                   <img class="card-img-top" src="./images/surf-400x340.jpg" alt="Surf">
                   <div class="card-body">
@@ -98,7 +110,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                   <img class="card-img-top" src="./images/hills-400x340.jpg" alt="Image 3">
                   <div class="card-body">
@@ -106,8 +118,7 @@
                     <p class="card-text">Some description about Image 3.</p>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-3">
+              </div>  <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card">
                   <img class="card-img-top" src="./images/path-400x340.jpg" alt="Image 4">
                   <div class="card-body">
@@ -125,27 +136,27 @@
           <h5>FROM THE BLOG</h5>
           <div class="line-over-page">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12 col-sm-12">
               <div class="card">
-                <img class="card-img-top" src="img1.jpg" alt="Image 1">
+                <img class="card-img-top" src="./images/cow-640x340.jpg" alt="Image 1">
                 <div class="card-body">
                   <h5 class="card-title">Image 1 Title</h5>
                   <p class="card-text">Some description about Image 1.</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12 col-sm-12">
               <div class="card">
-                <img class="card-img-top" src="img2.jpg" alt="Image 2">
+                <img class="card-img-top" src="./images/sunrise-640x340.jpg" alt="Image 2">
                 <div class="card-body">
                   <h5 class="card-title">Image 2 Title</h5>
                   <p class="card-text">Some description about Image 2.</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12 col-sm-12">
               <div class="card">
-                <img class="card-img-top" src="img3.jpg" alt="Image 3">
+                <img class="card-img-top" src="./images/grass-640x340.jpg" alt="Image 3">
                 <div class="card-body">
                   <h5 class="card-title">Image 3 Title</h5>
                   <p class="card-text">Some description about Image 3.</p>
@@ -182,25 +193,17 @@
                 <li><a href="#" class="text-muted">Work 3</a></li>
                 <li><a href="#" class="text-muted">Work 4</a></li>
                 <li><a href="#" class="text-muted">Work 4</a></li>
-            
               </ul>
             </div>
           </div>
-          <div class="bg-dark text-muted py-2">
-            <div class="container text-center">
-              <p>@2020 ITAcademy</p>
-            </div>
           </div>
         </div>
-        
       </footer>
+      <div class="footer text-muted py-2 text-center">
+          <p>@2020 ITAcademy</p>
+        </div>
     </div>
     
-  
-
-      
-   
-    <!-- Bootstrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
