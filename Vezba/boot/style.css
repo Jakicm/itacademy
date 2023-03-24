@@ -9,3 +9,30 @@
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
   }
+
+  .container {
+    padding: 2px;
+
+  }
+
+  .card-img-top-ico {
+    height: 60px;
+    width: 60px;
+  }
+
+  .footer {
+    background-color: black;
+  }
+
+  .bg-dark {
+    padding: 40px;
+  }
+
+  .blog {
+    padding: 25px;
+  }
+
+  .work {
+    padding: 25px;
+  }
+ 
