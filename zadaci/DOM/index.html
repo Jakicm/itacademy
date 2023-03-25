@@ -14,23 +14,60 @@
         <form>
             <div class="user">
                 <label for="username">Username:</label>
-                <input id="username" type="text" name="username">
+                <input id="username" type="text" name="username" placeholder="enter username:">
                 <i class="fa fa-times u_times"></i>
                 <i class="fa fa-check u_check"></i>
             </div>
 
-            <div>
+            <div class="user">
                 <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
+                <input id="password" type="password" name="password" placeholder="enter password:">
+                <i class="fa fa-times p_times"></i>
+                <i class="fa fa-check p_check"></i>
             </div>
 
             <button type="button" id="login-button">Login</button>
         </form><br><br>
         <div id="result"></div>
     </div>
-      
     
-    <script src="validate.js"></script>
+    <script>
+    let user = document.querySelector('#username');
+    user.addEventListener('keyup',function(){
+    let u_times = document.querySelector('.u_times');
+    let u_check = document.querySelector('.u_check');
+    
+    if (user.value !== 'new_user') {
+    user.style.border = '2px solid red';
+    u_times.style.display = 'block';
+    u_check.style.display = 'none';
+
+    } else {
+    user.style.border = '2px solid green';
+    u_times.style.display = 'none';
+    u_check.style.display = 'block';
+    }
+    })
+
+    let pass = document.querySelector('#password');
+    pass.addEventListener('keyup',function(){
+    let p_times = document.querySelector('.p_times');
+    let p_check = document.querySelector('.p_check');
+    if (pass.value !== '123456789') {
+    pass.style.border = '2px solid red';
+    p_times.style.display = 'block';
+    p_check.style.display = 'none';
+
+    } else {
+    pass.style.border = '2px solid green';
+    p_times.style.display = 'none';
+    p_check.style.display = 'block';
+    }
+    })
+
+
+    </script>
+   
     <script src="main.js"></script>
      
 </body>
