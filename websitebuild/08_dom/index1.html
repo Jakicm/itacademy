@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="my-class">Text 1</p>
+    <p class="my-class">Text 2</p>
+    <p class="my-class some-other-class">Text 3</p>
+    <p>Text 4</p>
+    <p>Text 5</p>
+    <p class="your-class">Text 6</p>
+
+    <script>
+        var paragraphs = document.getElementsByClassName('my-class');
+        console.log(paragraphs.length);
+
+        for ( let i=0; paragraphs.length; i++ ) {
+            console.log(paragraphs[i].innerHTML);
+        }
+    </script>
+</body>
+</html>
