@@ -45,7 +45,7 @@
 
     <script>
 
-            let subscribeForm = document.getElementById("subscribe-form");
+       /*     let subscribeForm = document.getElementById("subscribe-form");
             subscribeForm.addEventListener("submit", function (e) {               // function (e) anonimna funkcija
             e.preventDefault();
                 let nameInput = document.getElementById("name");
@@ -53,7 +53,22 @@
                 alert("Name: " + nameInput.value + "\n" +
                     "Email: " + emailInput.value);
  
-            });
+            }); */
+
+        /*    $("#subscribe-form") //Selektovanje elementa koji ima ID #s-f
+            jQuery("#subscribe-form") //ista funkcija
+
+            $("#subscribe-form").submit(function (e) {
+                e.preventDefault();
+                alert("Name: " + $("#name").val() + "\n" +
+                    "Email: " + $("#email").val());
+            }); */
+
+            let nameInput = $("#name");
+            console.log(nameInput.length);
+
+
+
 
     </script>
     <script src="js/jquery-3.6.4.min.js"></script>
