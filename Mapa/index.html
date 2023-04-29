@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with Data from File</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+  <style>
+   #mapid {
+      height: 100vh;
+      width: 100vw;
+    }
+    .container {
+      display: flex;
+      gap: 16px;
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="mapid"></div>
+  <div id="add">
+
+    <form id="add-form">
+      <label for="name-input">Name:</label>
+      <input type="text" id="name-input" name="name" required>
+      <br>
+      <label for="address-input">Address:</label>
+      <input type="text" id="address-input" name="address" required>
+      <br>
+      <label for="latitude-input">Latitude:</label>
+      <input type="number" id="latitude-input" name="latitude" step="0.0001" required>
+      <br>
+      <label for="longitude-input">Longitude:</label>
+      <input type="number" id="longitude-input" name="longitude" step="0.0001" required>
+      <br>
+      <button type="submit">Add Location</button>
+    </form>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+<script>
+  // Load location data from file
+  fetch('locations.json')
+    .then(response => response.json())
+    .then(locations => {
+      var map = L.map('mapid').setView([44.82903000, 20.36875000], 8);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      for (var i = 0; i < locations.length; i++) {
+        L.marker([locations[i].latitude, locations[i].longitude]).addTo(map)
+          .bindPopup('<b>' + locations[i].CustomerName + '</b><br>' + locations[i].Address);
+      }
+    })
+    .catch(error => console.error(error));
+</script>
+
+</body>
+</html>

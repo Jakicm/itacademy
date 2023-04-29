@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add New Location</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>Add New Location</h1>
+
+  <form id="add-form">
+    <label for="name-input">Name:</label>
+    <input type="text" id="name-input" name="name" required>
+    <br>
+    <label for="address-input">Address:</label>
+    <input type="text" id="address-input" name="address" required>
+    <br>
+    <label for="latitude-input">Latitude:</label>
+    <input type="number" id="latitude-input" name="latitude" step="0.00001" required>
+    <br>
+    <label for="longitude-input">Longitude:</label>
+    <input type="number" id="longitude-input" name="longitude" step="0.00001" required>
+    <br>
+    <button type="submit">Add Location</button>
+  </form>
+
+  <script>
+    // Handle form submission
+    document.getElementById('add-form').addEventListener('submit', event => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const locationData = {
+        CustomerName: formData.get('name'),
+        Address: formData.get('address'),
+        latitude: Number(formData.get('latitude')),
+        longitude: Number(formData.get('longitude'))
+      };
+
+      // Load existing location data from file
+      fetch('locations.json')
+        .then(response => response.json())
+        .then(locations => {
+          // Assign a unique ID to the new location
+          const maxId = Math.max(...locations.map(location => location.id));
+          locationData.id = maxId + 1;
+
+          // Add the new location to the locations array
+          locations.push(locationData);
+
+          // Save the updated location data to file
+          fetch('locations.json', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(locations)
+          })
+            .then(() => {
+              alert('New location added successfully!');
+              event.target.reset();
+            })
+            .catch(error => console.error(error));
+        })
+        .catch(error => console.error(error));
+    });
+  </script>
+</body>
+</html>
