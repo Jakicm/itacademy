@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Route Demo</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  <script>
+    function initMap() {
+      // Create a new map centered on Belgrade
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat: 44.7866, lng: 20.4489 },
+      });
+
+      // Define the starting position
+      const startingPosition = new google.maps.LatLng(44.838277, 20.399597);
+
+      // Fetch the JSON data from the file
+      fetch("locations.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // Create an array of LatLng objects from the JSON data, with the starting position at the beginning
+          const locations = [startingPosition].concat(
+            data.map((location) => new google.maps.LatLng(location.latitude, location.longitude))
+          );
+
+          // Create markers for each location and add them to the map
+          const markers = locations.map(
+            (location) => new google.maps.Marker({ position: location, map })
+          );
+
+          // Calculate and display the best route using DirectionsService and DirectionsRenderer
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer({ map });
+
+          const request = {
+            origin: startingPosition,
+            destination: locations[locations.length - 1],
+            waypoints: locations.slice(1, -1).map((location) => ({ location })),
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+          };
+
+          directionsService.route(request, (response, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsRenderer.setDirections(response);
+            } else {
+              console.error("Error:", status);
+            }
+          });
+        })
+        .catch((error) => console.error(error));
+    }
+  </script>
+  <style>
+    #map {
+      height: 100vh;
+    }
+  </style>
+</head>
+<body onload="initMap()">
+  <div id="map"></div>
+</body>
+</html>
