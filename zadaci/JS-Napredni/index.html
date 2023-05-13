@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadatak</title>
+</head>
+<style>
+
+#students {
+    padding-left: 50px;
+    padding-top: 50px;
+    font-weight: bold;
+}
+
+</style>
+<body>
+
+    <div id="students"></div>
+
+    <script>
+
+        fetch('students.txt')
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(list) {
+            const lineBreak = list.split('\n');
+            const students = [];
+
+            for (let i = 0; i < lineBreak.length; i += 4) {
+            const name = lineBreak[i];
+            const address = lineBreak[i + 1];
+            const phone = lineBreak[i + 2];
+            const course = lineBreak[i + 3];
+
+            const student = {
+                name: name,
+                address: address,
+                phone: phone,
+                course: course
+            };
+
+            students.push(student);
+            }
+
+            let studentList = '';
+
+        students.forEach(function(student) {
+        studentList += "Name: " + student.name + "\n" +
+                        "Address: " + student.address + "\n" +
+                        "Phone: " + student.phone + "\n" +
+                        "Course: " + student.course + "\n\n";
+        });
+
+
+            document.getElementById('students').innerText = studentList;
+        });
+
+
+    </script>
+
+</body>
+</html>

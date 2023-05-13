@@ -19,4 +19,7 @@ class Student {
     const students = [student1, student2, student3];
     for (const student of students) {
     console.log(student.getInfo());
-}
+
+   
+
+    }
