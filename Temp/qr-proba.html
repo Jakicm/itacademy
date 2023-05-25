@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plaćanje</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+  <form id="qrCodeForm">
+   
+    <input type="text" id="K" value="PR" name="K" hidden><br><br>
+
+    <input type="text" id="V" name="V" value="01" hidden><br><br>
+
+    <input type="text" id="C" name="C" value="1" hidden><br><br>
+
+    <h3>Primalac:</h3>
+
+    <label for="R">Žiro račun:</label>
+    <input type="text" id="R" name="R" required><br><br>
+
+    <label for="N1">Primalac:</label>
+    <input type="text" id="N1" name="N1" required><br><br>
+
+    <label for="N2">Adresa:</label>
+    <input type="text" id="N2" name="N2" required><br><br>
+
+    <label for="I">Iznos:</label>
+    <input type="text" id="I" name="I" placeholder="0,00 format" required><br><br>
+
+    <h3>Uplatilac:</h3>
+
+    <label for="PName">Ime i prezime:</label>
+    <input type="text" id="PName" name="PName" required><br><br>
+
+    <label for="PAddress">Adresa:</label>
+    <input type="text" id="PAddress" name="PAddress" required><br><br>
+
+    <label for="PCity">Mesto:</label>
+    <input type="text" id="PCity" name="PCity" required><br><br>
+
+    <label for="SF">Šifra plaćanja:</label>
+    <input type="text" id="SF" name="SF" required><br><br>
+
+    <label for="S">Svrha uplate:</label>
+    <input type="text" id="S" name="S" required><br><br>
+
+    <label for="RO">Poziv na broj:</label>
+    <input type="text" id="RO" name="RO" required><br><br>
+
+    <button type="submit">Generiši</button>
+  </form>
+
+
+  <div id="qrCodeContainer"></div>
+</div>>
+
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
