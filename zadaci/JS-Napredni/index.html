@@ -21,6 +21,15 @@
 
     <script>
 
+        class Student {
+        constructor(name, address, phone, course) {
+            this.name = name;
+            this.address = address;
+            this.phone = phone;
+            this.course = course;
+        }
+        }
+
         fetch('students.txt')
         .then(function(response) {
             return response.text();
@@ -35,28 +44,23 @@
             const phone = lineBreak[i + 2];
             const course = lineBreak[i + 3];
 
-            const student = {
-                name: name,
-                address: address,
-                phone: phone,
-                course: course
-            };
+            const student = new Student(name, address, phone, course);
 
             students.push(student);
             }
 
             let studentList = '';
 
-        students.forEach(function(student) {
-        studentList += "Name: " + student.name + "\n" +
-                        "Address: " + student.address + "\n" +
-                        "Phone: " + student.phone + "\n" +
-                        "Course: " + student.course + "\n\n";
-        });
-
+            students.forEach(function(student) {
+            studentList += "Name: " + student.name + "\n" +
+                "Address: " + student.address + "\n" +
+                "Phone: " + student.phone + "\n" +
+                "Course: " + student.course + "\n\n";
+            });
 
             document.getElementById('students').innerText = studentList;
         });
+
 
 
     </script>

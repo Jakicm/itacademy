@@ -7,11 +7,42 @@
 	<title>Document</title>
 </head>
 <body>
-	<p id="my-paragraph">Hello</p>
+	<script>
+const requestBody = {
+  K: "PR",
+  V: "01",
+  C: "1",
+  R: "845000000040484987",
+  N: "JP EPS BEOGRAD\r\nBALKANSKA 13",
+  I: "RSD3596,13",
+  P: "MRĐO MAČKATOVIĆ\r\nŽUPSKA 13\r\nBEOGRAD 6",
+  SF: "189",
+  S: "UPLATA PO RAČUNU ZA EL. ENERGIJU",
+  RO: "97163220000111111111000"
+};
 
-<script>
-$("#my-paragraph").append(' World');
-</script>
+fetch('https://nbs.rs/QRcode/api/qr/v1/gen?lang=sr_RS', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(requestBody),
+})
+  .then(response => response.blob())
+  .then(blob => {
+    // Create a URL object from the response blob
+    const url = URL.createObjectURL(blob);
 
+    // Use the URL to display the generated QR code
+    const qrCodeImage = document.createElement('img');
+    qrCodeImage.src = url;
+    document.body.appendChild(qrCodeImage);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+	</script>
 </body>
 </html>

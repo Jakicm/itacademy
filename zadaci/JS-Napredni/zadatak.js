@@ -1,13 +1,17 @@
 
 
-var Student = function(ime, adresa, telefon) {
-    this.ime = ime;
-    this.adresa = adresa;
-    this.telefon = telefon;
-    this.getInfo = function(){
-          return "Ime: "+ this.ime + "\n" +
-          "Adresa: " + this.adresa + "\n" +
-          "Telefon: " + this.telefon;
+
+const student = {
+    name: name,
+    address: address,
+    phone: phone,
+    course: course,
+
+
+          getInfo = function(){
+          return "name: "+ this.name + "\n" +
+          "address: " + this.address + "\n" +
+          "phone: " + this.phone;
     };
 }
 

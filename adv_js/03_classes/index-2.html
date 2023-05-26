@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+
+        class Car{  
+            constructor(make, model, weight, color){
+
+                this.make = make;
+                this.model = model;
+                this._weight = weight;
+                this.color = color;
+
+            }
+
+        }
+          class Convertable extends Car {  // Nasledjuje klasu Car 
+            constructor (make, model, weight, color, roofType){
+                super(make, model, weight, color); // specijlna oznaka da kopira
+                this.roofType = roofType;
+            }
+
+            getInfo() {
+            return super.getInfo + "\n" + "roofType: " + this.roofType
+            }
+          }
+
+          let convertible1 = new Convertible("Honda", "S2000", 1274, "silver", "Vinyl, soft-top");
+
+    </script>
+   
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code API Form</title>
+</head>
+<body>
+  <h1>QR Code API Form</h1>
+  <form id="qrCodeForm">
+    <label for="K">K:</label>
+    <input type="text" id="K" name="K" required><br>
+
+    <label for="V">V:</label>
+    <input type="text" id="V" name="V" required><br>
+
+    <label for="C">C:</label>
+    <input type="text" id="C" name="C" required><br>
+
+    <label for="R">R:</label>
+    <input type="text" id="R" name="R" required><br>
+
+    <label for="N">N:</label>
+    <input type="text" id="N" name="N" required><br>
+
+    <label for="I">I:</label>
+    <input type="text" id="I" name="I" required><br>
+
+    <label for="P">P:</label>
+    <textarea id="P" name="P" rows="3" required></textarea><br>
+
+    <label for="SF">SF:</label>
+    <input type="text" id="SF" name="SF" required><br>
+
+    <label for="S">S:</label>
+    <input type="text" id="S" name="S" required><br>
+
+    <label for="RO">RO:</label>
+    <input type="text" id="RO" name="RO" required><br>
+
+    <button type="submit">Generate QR Code</button>
+  </form>
+
+  <div id="qrCodeContainer"></div>
+
+  <script>
+    document.getElementById("qrCodeForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the form from submitting
+
+      const form = event.target;
+      const formData = new FormData(form);
+
+      const requestBody = {
+  "K": formData.get("K"),
+  "V": formData.get("V"),
+  "C": formData.get("C"),
+  "R": formData.get("R"),
+  "N": formData.get("N"),
+  "I": formData.get("I"),
+  "P": formData.get("P"),
+  "SF": formData.get("SF"),
+  "S": formData.get("S"),
+  "RO": formData.get("RO"),
+  "JS": "", // Add an empty value for the "JS" property
+};
+
+// Splitting P parameter into name, address, and city
+const parts = formData.get("P").split("\\r\\n");
+requestBody["P"] = parts[0] ? parts[0].trim() : ""; // Extract name
+requestBody["address"] = parts[1] ? parts[1].trim() : ""; // Extract address
+requestBody["city"] = parts[2] ? parts[2].trim() : ""; // Extract city
+
+
+      fetch('https://nbs.rs/QRcode/api/qr/v1/gen?lang=sr_RS', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+
+          const qrCodeImage = document.createElement('img');
+          qrCodeImage.src = url;
+
+          const qrCodeContainer = document.getElementById('qrCodeContainer');
+          qrCodeContainer.innerHTML = '';
+          qrCodeContainer.appendChild(qrCodeImage);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+</body>
+</html>
