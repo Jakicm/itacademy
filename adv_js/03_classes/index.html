@@ -9,15 +9,15 @@
 <body>
     <script>  // specijlani tip funkcije! mogu se naci samo metode i konstruktori
 
-          class Car{  
-            constructor(make, model, weight, color){
-
-                this.make = make;
-                this.model = model;
-                this._weight = weight;
-                this.color = color;
-
-            }
+class Car {
+ 
+                constructor(make, model, weight, color) {
+                    this.make = make;
+                    this.model = model;
+                    this.weight = weight;
+                    this.color = color;
+                }
+                /*
             get name() {
                 return this.make + "" + this.model;
             }
@@ -34,14 +34,14 @@
             get weight () {
                 return this._weight + "kg";
             }
-            
+            */
 
-            getInfo() {
-            return "Make: " + this.make + "\n" +
-            "Model: " + this.model + "\n" +
-            "Weight: " + this.weight + "\n" +
-            "Color: " + this.color
-            }
+                        getInfo() {
+                    return "Make: " + this.make + "\n" +
+                    "Model: " + this.model + "\n" +
+                    "Weight: " + this.weight + "\n" +
+                    "Color: " + this.color
+                }
         }
         
           
@@ -50,9 +50,9 @@
             var car3 = new Car("Porsche", "Panamera", 1963, "grey");
 
 
-            car1.weight = 1900;
-            console.log(car1.getInfo);
-            console.log(car2.name);
+           // car1.weight = 1900;
+            console.log(car1.getInfo());
+         //   console.log(car2.name);
 
     </script>
    
