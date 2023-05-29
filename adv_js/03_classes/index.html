@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  // specijlani tip funkcije! mogu se naci samo metode i konstruktori
+
+class Car {
+ 
+                constructor(make, model, weight, color) {
+                    this.make = make;
+                    this.model = model;
+                    this.weight = weight;
+                    this.color = color;
+                }
+                /*
+            get name() {
+                return this.make + "" + this.model;
+            }
+
+            set weight(weight) {
+                if(!isNaN(weight)) {
+
+                    this._weight = weight; }
+                else {
+                        throw new TypeError("Ne valja")
+                }
+
+                }
+            get weight () {
+                return this._weight + "kg";
+            }
+            */
+
+                        getInfo() {
+                    return "Make: " + this.make + "\n" +
+                    "Model: " + this.model + "\n" +
+                    "Weight: " + this.weight + "\n" +
+                    "Color: " + this.color
+                }
+        }
+        
+          
+            var car1 = new Car("Subary", "Legacy", 1563, "black");
+            var car2 = new Car("Ford", "Taurus", 1876, "blue");
+            var car3 = new Car("Porsche", "Panamera", 1963, "grey");
+
+
+           // car1.weight = 1900;
+            console.log(car1.getInfo());
+         //   console.log(car2.name);
+
+    </script>
+   
+</body>
+</html>
