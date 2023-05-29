@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with Data from File</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+
+  <style>
+    #mapid {  height: 95vh;
+      width: 95vw; }
+  </style>
+</head>
+<body>
+  <div id="mapid"></div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script>
+    // Load location data from file
+    fetch('locations.json')
+      .then(response => response.json())
+      .then(locations => {
+        var map = L.map('mapid').setView([44.8124, 20.4506], 8);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18
+        }).addTo(map);
+        L.Control.geocoder().addTo(map);
+    
+
+        for (var i = 0; i < locations.length; i++) {
+          L.marker([locations[i].latitude, locations[i].longitude]).addTo(map)
+            .bindPopup('<b>' + locations[i].CustomerName + '</b><br>' + locations[i].Address);
+        }
+      })
+      
+      .catch(error => console.error(error));
+ 
+     
+      
+  </script>
+</body>
+</html>

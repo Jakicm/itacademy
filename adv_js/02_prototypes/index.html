@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proto</title>
+</head>
+<body>
+    <script>
+
+function Car(make, model, weight, color) {
+            this.make = make;
+            this.model = model;
+            this.weight = weight;
+            this.color = color;
+
+            this.startEngine = function() {
+                return "Engine of" + this.make + " " + this.model + "started"
+            } 
+
+        }
+
+        console.log(Car.prototype);
+
+        var subaryLegacy = new Car("Subary", "Legacy", 1560, "black");
+
+        console.log(subaryLegacy.__proto__ === Car.prototype); // pristup prototipu!
+        console.log(subaryLegacy.toString());
+
+    </script>
+</body>
+</html>
