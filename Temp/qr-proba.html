@@ -4,57 +4,113 @@
   <title>Plaćanje</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+<style>
+  
+.body {
+  padding-top: 25px;
+}
+  .container {
+  border: 2px solid black;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+</style>
 </head>
 <body>
+    <br>
+
     <div class="container">
-  <form id="qrCodeForm">
-   
-    <input type="text" id="K" value="PR" name="K" hidden><br><br>
+      
+      
+    <form id="qrCodeForm">
 
-    <input type="text" id="V" name="V" value="01" hidden><br><br>
 
-    <input type="text" id="C" name="C" value="1" hidden><br><br>
 
-    <h3>Primalac:</h3>
+    <div class="form-row">
+    
+    <div class="form-group col-md-2">
+    <input type="text" id="K" value="PR" name="K" class="form-control" disabled hidden>
+    </div>
 
-    <label for="R">Žiro račun:</label>
-    <input type="text" id="R" name="R" required><br><br>
 
-    <label for="N1">Primalac:</label>
-    <input type="text" id="N1" name="N1" required><br><br>
 
-    <label for="N2">Adresa:</label>
-    <input type="text" id="N2" name="N2" required><br><br>
+   <div class="form-group col-md-2">
+   <input type="text" id="V" name="V" class="form-control" value="01" disabled hidden>
+   </div>
+   <div class="form-group col-md-2">
+   <input type="text" id="C" name="C" class="form-control" value="1" disabled hidden>
+   </div>
+    
+   <div class="w-100"></div>
 
-    <label for="I">Iznos:</label>
-    <input type="text" id="I" name="I" placeholder="0,00 format" required><br><br>
+   <div class="form-group col-md-6">
+    <label for="P">Uplatilac:</label>
+    <textarea type="text" id="P" name="P" class="form-control" required></textarea>
+    </div>
 
-    <h3>Uplatilac:</h3>
-
-    <label for="PName">Ime i prezime:</label>
-    <input type="text" id="PName" name="PName" required><br><br>
-
-    <label for="PAddress">Adresa:</label>
-    <input type="text" id="PAddress" name="PAddress" required><br><br>
-
-    <label for="PCity">Mesto:</label>
-    <input type="text" id="PCity" name="PCity" required><br><br>
-
+    <div class="form-group col-md-2">
     <label for="SF">Šifra plaćanja:</label>
-    <input type="text" id="SF" name="SF" required><br><br>
+    <input type="text" id="SF" name="SF" class="form-control" required>
+    </div>
 
-    <label for="S">Svrha uplate:</label>
-    <input type="text" id="S" name="S" required><br><br>
+    <div class="form-group col-md-4">
+      <label for="I">Iznos:</label>
+      <input type="text" id="I" name="I" class="form-control" placeholder="0,00 format" required></div>
+      
+  
+
+    <div class="w-100"></div>
+
+    <div class="form-group col-md-6">
+      <label for="S">Svrha uplate:</label>
+      <textarea type="text" id="S" name="S" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group col-md-6">
+    <label for="R">Žiro račun:</label>
+    <input type="text" id="R" name="R" class="form-control" required></div>
+
+    <div class="w-100"></div>
+    
+ 
+
+    <div class="form-group col-md-6">
+    <label for="N">Primalac:</label>
+    <textarea type="text" id="N" name="N" class="form-control" required></textarea>
+    </div>
+
+    <div class="w-100"></div>
+
+    
+
+
+
+  
+
+    
+   
 
     <label for="RO">Poziv na broj:</label>
     <input type="text" id="RO" name="RO" required><br><br>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="horizontal-line"></div>
+      </div>
+    </div>
+
+ 
 
     <button type="submit">Generiši</button>
   </form>
 
+  </div>
+
 
   <div id="qrCodeContainer"></div>
-</div>>
+
 
   <script src="script.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -9,13 +9,15 @@ document.getElementById('qrCodeForm').addEventListener('submit', function(event)
       V: form.elements.V.value,
       C: form.elements.C.value,
       R: form.elements.R.value,
-      N: `${form.elements.N1.value}\r\n${form.elements.N2.value}`,
+      N: form.elements.N.value,
       I: `RSD${form.elements.I.value}`,
-      P: `${form.elements.PName.value}\r\n${form.elements.PAddress.value}\r\n${form.elements.PCity.value}`,
+      P: form.elements.P.value,
       SF: form.elements.SF.value,
       S: form.elements.S.value,
       RO: form.elements.RO.value
     };
+
+    //       P: `${form.elements.PName.value}\r\n${form.elements.PAddress.value}\r\n${form.elements.PCity.value}`,
     
     fetch('https://nbs.rs/QRcode/api/qr/v1/gen/500', {
       method: 'POST',
