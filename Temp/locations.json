@@ -1,0 +1,46 @@
+[
+	{
+		"CustomerName": "NIKOLA PROMET DOO",
+		"Address": "DR NEDELJKA ERCEGOVCA 24",
+		"Contact":"+381641100111",
+		"latitude": "44.83827700",
+		"longitude": "20.39959700"
+	},
+	{
+		"CustomerName": "MERCATOR-S DOO",
+		"Address": "AUTOPUT ZA ZAGREB 11A",
+		"Contact":"+381641100111",
+		"latitude": "44.82903000",
+		"longitude": "20.36875000"
+	},
+	{
+		"CustomerName": "GOLIJA MESNA INDUSTRIJA",
+		"Address": "IBARSKI PUT  3",
+		"Contact":"+381641100111",
+		"latitude": "44.62980814",
+		"longitude": "20.37958567"
+	},
+	{
+		"CustomerName": "STUR Bubreg",
+		"Address": "34, Булевар Милутина Миланковића",
+		"Contact":"+381641100111",
+		"latitude": "44.80695490126284",
+		"longitude": "20.42275755948192"
+	},
+	{
+		"CustomerName": "MESARA MORAVA",
+		"Address": "Илије Гарашанина 20, Београд 11000",
+		"Contact":"+381641100111",
+		"latitude": "44.81291435646378",
+		"longitude": "20.471838127817126"
+	},
+	{
+		"CustomerName": "MESARA MIKI",
+		"Address": "Радована Симића-Циге 1-17, Београд",
+		"Contact":"+381641100111",
+		"latitude": "44.77728686468436",
+		"longitude": "20.49793717686592"
+	}
+	
+]
+

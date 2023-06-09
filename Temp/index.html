@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Map Locations</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
-    <script>
-        function initMap() {
-            // Create a new map object
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,
-                center: {lat: <?php echo $locations[0]['latitude']; ?>, lng: <?php echo $locations[0]['longitude']; ?>}
+  <title>Best Route Demo</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAliK_Bgj8HeMhYz4hXJJvun35WncRHAXI"></script>
+  <script>
+    function initMap() {
+      // Create a new map centered on Belgrade
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat: 44.7866, lng: 20.4489 },
+      });
+
+      // Define the starting position
+      const startingPosition = new google.maps.LatLng(44.96951794143551, 19.744571500853493);
+
+      // Fetch the JSON data from the file
+      fetch("locations.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // Create an array of LatLng objects from the JSON data, with the starting position at the beginning
+          const locations = [startingPosition].concat(
+            data.map((location) => ({
+              position: new google.maps.LatLng(location.latitude, location.longitude),
+              customerName: location.CustomerName,
+            }))
+          );
+
+          // Create markers for each location and add them to the map
+          const markers = locations.map((location) => {
+            const marker = new google.maps.Marker({ position: location.position, map });
+
+            // Create an InfoWindow for each marker to display the customer name
+            const infoWindow = new google.maps.InfoWindow({ content: location.customerName });
+
+            // Add a click event listener to the marker to open the InfoWindow
+            marker.addListener("click", () => {
+              infoWindow.open(map, marker);
             });
 
-            // Add markers for each location
-            <?php foreach ($locations as $location): ?>
-            new google.maps.Marker({
-                position: {lat: <?php echo $location['latitude']; ?>, lng: <?php echo $location['longitude']; ?>},
-                map: map,
-                title: <?php echo json_encode($location['name']); ?>
-            });
-            <?php endforeach; ?>
-        }
-    </script>
+            return marker;
+          });
+
+          // Calculate and display the best route using DirectionsService and DirectionsRenderer
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer({ map });
+
+          const request = {
+            origin: startingPosition,
+            destination: locations[locations.length - 1].position,
+            waypoints: locations.slice(1, -1).map((location) => ({ location: location.position })),
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+          };
+
+          directionsService.route(request, (response, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsRenderer.setDirections(response);
+            } else {
+              console.error("Error:", status);
+            }
+          });
+        })
+        .catch((error) => console.error(error));
+    }
+  </script>
+  <style>
+    #map {
+      height: 100vh;
+    }
+  </style>
 </head>
-<body>
-	<p id="my-paragraph">Hello</p>
-
-<script>
-$("#my-paragraph").append(' World');
-</script>
-
+<body onload="initMap()">
+  <div id="map"></div>
 </body>
 </html>

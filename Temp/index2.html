@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Route Demo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    #map {
+      height: 1000px;
+      margin-bottom: 20px;
+    }
+    .container-flex {
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-flex">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="map"></div>
+      </div>
+      <div class="col-md-6">
+        <table id="locationsTable" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th>Address</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    function initMap() {
+      // Create a new map centered on Belgrade
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat: 44.7866, lng: 20.4489 },
+      });
+
+      const startingPosition = new google.maps.LatLng(44.96951794143551, 19.744571500853493);
+      const endPosition = new google.maps.LatLng(44.96951794143551, 19.744571500853493);
+
+      // Fetch the JSON data from the file
+      fetch("locations.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // Create an array of LatLng objects from the JSON data
+          const locations = data.map((location) => ({
+            position: new google.maps.LatLng(location.latitude, location.longitude),
+            customerName: location.CustomerName,
+            address: location.Address,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          }));
+
+          // Add the starting and end positions to the locations array
+          locations.unshift({ position: startingPosition });
+          locations.push({ position: endPosition });
+
+          // Calculate and display the best route using DirectionsService and DirectionsRenderer
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer({ map });
+
+          const request = {
+            origin: startingPosition,
+            destination: endPosition,
+            waypoints: locations.slice(1, -1).map((location) => ({ location: location.position })),
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+          };
+
+          directionsService.route(request, (response, status) => {
+            if (status === google.maps.DirectionsStatus.OK) {
+              directionsRenderer.setDirections(response);
+
+              // Sort the locations based on their order in the directions response
+              const route = response.routes[0];
+              const waypointOrder = route.waypoint_order;
+
+              // Sort the locations array based on the waypoint order
+              const sortedLocations = [locations[0], ...waypointOrder.map((index) => locations[index + 1]), locations[locations.length - 1]];
+
+              // Update the table with location information
+              const tableBody = document.querySelector("#locationsTable tbody");
+              tableBody.innerHTML = ""; // Clear existing table rows
+
+              sortedLocations.slice(1, -1).forEach((location) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                  <td>${location.customerName}</td>
+                  <td>${location.address}</td>
+                  <td>${location.latitude}</td>
+                  <td>${location.longitude}</td>
+                `;
+                tableBody.appendChild(row);
+              });
+            } else {
+              console.error("Error:", status);
+            }
+          });
+        })
+        .catch((error) => console.error(error));
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAliK_Bgj8HeMhYz4hXJJvun35WncRHAXI&callback=initMap" async defer></script>
+</body>
+</html>

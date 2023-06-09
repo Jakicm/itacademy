@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Route Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-QWDrTHNQ2ysGKdc6O+yAi9Z+kN+HT+CQCnJBfYzrkr3Jl9X+jUa+CrkQ2n1eVW/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <style>
+    #map {
+      height: 1000px;
+      margin-bottom: 20px;
+    }
+
+    .container-flex {
+      padding-top: 30px;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-flex">
+    <form id="fileForm">
+      <div class="form-group">
+        <label for="jsonFile">Odaberi:</label>
+        <input type="file" class="form-control-file" id="jsonFile" accept=".json" required>
+      </div>
+      <button type="submit" class="btn btn-outline-dark">Računaj:</button>
+    </form>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="map"></div>
+      </div>
+      <div class="col-md-6">
+        <table id="locationsTable" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Pozicija:</th>
+              <th>Kupac:</th>
+              <th>Adresa:</th>
+              <th>Kontakt:</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="totalDistance"></div>
+        <br>
+        <button class="btn btn-outline-dark" onclick="printTable()">Štampaj:</button>
+      </div>
+    </div>
+  
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  
+  <script src="scriptt.js"></script>
+  <script>
+    function initMap() {
+      // Create a new map centered on Belgrade
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat: 44.7866, lng: 20.4489 },
+      });
+
+      const startingPosition = new google.maps.LatLng(44.96951794143551, 19.744571500853493);
+      const endPosition = new google.maps.LatLng(44.98002476207817, 19.609385476746873);
+
+      const fileForm = document.getElementById("fileForm");
+      fileForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const jsonFile = document.getElementById("jsonFile").files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          const jsonData = event.target.result;
+
+          try {
+            const data = JSON.parse(jsonData);
+
+            // Create an array of LatLng objects from the JSON data
+            const locations = data.map((location) => ({
+              position: new google.maps.LatLng(location.latitude, location.longitude),
+              customerName: location.CustomerName,
+              address: location.Address,
+              latitude: location.latitude,
+              longitude: location.longitude,
+              contact: location.Contact,
+            }));
+
+            // Add the starting and end positions to the locations array
+            locations.unshift({ position: startingPosition });
+            locations.push({ position: endPosition });
+
+            // Calculate and display the best route using DirectionsService and DirectionsRenderer
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({ map });
+
+            const request = {
+              origin: startingPosition,
+              destination: endPosition,
+              waypoints: locations.slice(1, -1).map((location) => ({ location: location.position })),
+              optimizeWaypoints: true,
+              travelMode: google.maps.TravelMode.DRIVING,
+            };
+
+            directionsService.route(request, (response, status) => {
+              if (status === google.maps.DirectionsStatus.OK) {
+                directionsRenderer.setDirections(response);
+
+                // Sort the locations based on their order in the directions response
+                const route = response.routes[0];
+                const waypointOrder = route.waypoint_order;
+
+                // Sort the locations array based on the waypoint order
+                const sortedLocations = [locations[0], ...waypointOrder.map((index) => locations[index + 1]), locations[locations.length - 1]];
+
+                // Update the table with location information
+                const tableBody = document.querySelector("#locationsTable tbody");
+                tableBody.innerHTML = ""; // Clear existing table rows
+
+                sortedLocations.slice(1, -1).forEach((location, index) => {
+                  const row = document.createElement("tr");
+                  row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${location.customerName}</td>
+                    <td>${location.address}</td>
+                    <td>${location.contact}</td>
+                  `;
+                  tableBody.appendChild(row);
+                });
+
+
+                // Calculate total route distance
+                const totalDistance = route.legs.reduce((sum, leg) => sum + leg.distance.value, 0);
+                const totalDistanceKm = (totalDistance / 1000).toFixed(2); // Convert to kilometers and round to 2 decimal places
+
+                // Display total route distance
+                const totalDistanceElement = document.getElementById("totalDistance");
+                totalDistanceElement.innerText = `Ukupna dužina rute: ${totalDistanceKm} km`;
+
+            
+              } else {
+                console.error("Error:", status);
+              }
+            });
+          } catch (error) {
+            console.error("Error parsing JSON file:", error);
+          }
+        };
+
+        reader.readAsText(jsonFile);
+      });
+    }
+
+    const downloadPDFButton = document.getElementById("downloadPDF");
+    downloadPDFButton.addEventListener("click", function() {
+      const doc = new jsPDF();
+
+      // Get table element
+      const table = document.getElementById("locationsTable");
+
+      // Convert table to PDF
+      doc.autoTable({
+        html: table,
+      });
+
+      // Download the PDF file
+      doc.save("locations.pdf");
+    });
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAliK_Bgj8HeMhYz4hXJJvun35WncRHAXI&callback=initMap" async defer></script>
+</body>
+</html>
