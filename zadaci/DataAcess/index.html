@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kviz</title>
+</head>
+<body>
+  <div id="quiz"></div>
+
+  <script>
+    // Učitavanje JSON datoteke
+    fetch('quiz.json')
+      .then(response => response.text())
+      .then(sadržaj => {
+        // Parsiranje JSON-a
+        var data = JSON.parse(sadržaj);
+
+        // Generisanje HTML koda
+        var htmlKod = '<div id="quiz">';
+
+        for (var ključ in data.quiz) {
+          if (data.quiz.hasOwnProperty(ključ)) {
+            var pitanje = data.quiz[ključ];
+            htmlKod += '<div class="pitanje">';
+            htmlKod += '<h3>' + pitanje.question + '</h3>';
+
+            for (var i = 0; i < pitanje.options.length; i++) {
+              var opcija = pitanje.options[i];
+              htmlKod += '<label>';
+              htmlKod +=
+                '<input type="radio" name="' +
+                ključ +
+                '" value="' +
+                opcija +
+                '">' +
+                opcija;
+              htmlKod += '</label><br>';
+            }
+
+            htmlKod += '</div>';
+          }
+        }
+
+        htmlKod += '</div>';
+
+        // Postavljanje HTML koda na stranicu
+        document.getElementById('quiz').innerHTML = htmlKod;
+
+        // Čekiranje odgovora iz local storagea
+        for (var ključ in data.quiz) {
+          if (data.quiz.hasOwnProperty(ključ)) {
+            var odgovor = localStorage.getItem(ključ);
+            if (odgovor) {
+              var radioDugme = document.querySelector(
+                'input[name="' + ključ + '"][value="' + odgovor + '"]'
+              );
+              if (radioDugme) {
+                radioDugme.checked = true;
+              }
+            }
+          }
+        }
+
+        // Čuvanje odgovora u local storageu prilikom promene izbora
+        var radioDugmadi = document.querySelectorAll('input[type="radio"]');
+        for (var i = 0; i < radioDugmadi.length; i++) {
+          radioDugmadi[i].addEventListener('change', function (event) {
+            var imePitanja = event.target.name;
+            var izabraniOdgovor = event.target.value;
+            localStorage.setItem(imePitanja, izabraniOdgovor);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Greška prilikom učitavanja JSON datoteke:', error);
+      });
+  </script>
+</body>
+</html>
