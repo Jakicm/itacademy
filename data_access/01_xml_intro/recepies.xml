@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<root>
+
+    <c:recipe xmlns:c="http://www.my-site.com/cooking">
+    <c:title>Grilled Cheese Sandwich</c:title>
+    <c:ngredients>
+        <c:ingredient qty="2">bread slice</c:ingredient>
+        <c:ingredient>cheese slice</c:ingredient>
+        <c:ingredient qty="2">margarine pat</c:ingredient>
+
+        <!--- 
+        xmlns – naziv atributa kojim se definiše prostor imena;
+        : – karakter dve tačke (:) kojim se razdvajaju xmlns i prefiks prostora imena;
+        prefix – prefiks koji će biti upotrebljavan za identifikaciju prostora imena;
+        URI – naziv prostora imena, koji se najčešće definiše u formi URL 
+        -->
+    </c:ingredients>
+   </c:recipe>
+
+
+<recipe>
+        <title>Kombucha Skin Cream</title>
+        <ingredients>
+            <ingredient qty="15g">beeswax</ingredient>
+            <ingredient qty="100ml">olive oil</ingredient>
+            <ingredient qty="1tbsp">wheat germ</ingredient>
+            <ingredient qty="10ml">calendula oil</ingredient>
+            <ingredient qty="2tsp">kombucha tea</ingredient>
+            <ingredient qty="1ml">lavender essential oil</ingredient>
+        </ingredients>
+    </recipe>
+
+    </root>

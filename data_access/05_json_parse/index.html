@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+                    var json = '{"countries":[{"countryCode":"sr","name":"Serbia","capital":"Belgrade","description":"Serbia is....."},{"countryCode":"fr","name":"France","capital":"Paris","description":"France is....."}]}';
+ 
+            var data = JSON.parse(json);
+            for (let i = 0; i < data.countries.length; i++) {
+                document.body.innerHTML += 
+'<h2>' + data.countries[i].name + '</h2>'
+                document.body.innerHTML += 
+'<p>Capital: ' + data.countries[i].capital + '</p>'
+                document.body.innerHTML +=
+ '<p>Description: ' + data.countries[i].description + '</p>'
+            }
+
+    </script>
+</body>
+</html>

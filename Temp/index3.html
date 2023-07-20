@@ -61,6 +61,17 @@
   
   <script src="scriptt.js"></script>
   <script>
+    function printTable() {
+    var table = document.getElementById("myTable");
+    var html = table.outerHTML;
+    var newWindow = window.open("", "_blank");
+    newWindow.document.open();
+    newWindow.document.write('<html><head><title>Print Table</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></head><body><div class="table-responsive">' + html + '</div></body></html>');
+    newWindow.document.close();
+    newWindow.print();
+}
+  </script>
+  <script>
     function initMap() {
       // Create a new map centered on Belgrade
       const map = new google.maps.Map(document.getElementById("map"), {
@@ -158,23 +169,8 @@
         reader.readAsText(jsonFile);
       });
     }
-
-    const downloadPDFButton = document.getElementById("downloadPDF");
-    downloadPDFButton.addEventListener("click", function() {
-      const doc = new jsPDF();
-
-      // Get table element
-      const table = document.getElementById("locationsTable");
-
-      // Convert table to PDF
-      doc.autoTable({
-        html: table,
-      });
-
-      // Download the PDF file
-      doc.save("locations.pdf");
-    });
   </script>
+  
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAliK_Bgj8HeMhYz4hXJJvun35WncRHAXI&callback=initMap" async defer></script>
 </body>
 </html>
