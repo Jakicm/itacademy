@@ -6,10 +6,11 @@
   <title>Code Snippet with Copy Function</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/atom-one-dark.min.css">
   <style>
     body {
-      background-color: #f0f0f0;
-      color: #333;
+      background-color: #1a1e21;
+      color: #c8c8c8;
       font-family: Arial, sans-serif;
     }
 
@@ -19,10 +20,10 @@
 
     .code-container {
       position: relative;
-      border: 1px solid #ccc;
+      border: 1px solid #343a40;
       border-radius: 6px;
       padding: 15px;
-      background-color: #fff;
+      background-color: #272b30;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       margin-bottom: 20px;
     }
@@ -35,55 +36,59 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background-color: #888;
+      background-color: #444; /* Darker grey color */
       border: none;
       color: #fff;
-      padding: 8px 14px;
+      padding: 2px 5px; /* Smaller padding */
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
 
     .copy-code-btn:hover {
-      background-color: #666;
-    }
-
-    .copy-code-btn.copied {
-      background-color: #28a745;
-    }
-
-    .copied-message {
-      position: absolute;
-      top: 10px;
-      right: 70px;
-      color: #28a745;
-      font-size: 0.8em;
-      display: none;
-    }
-
-    .copy-code-btn.copied + .copied-message {
-      display: block;
-      color: #28a745;
-      font-weight: bold;
+      background-color: #333; /* Even darker grey color on hover */
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Welcome to Our Website</h1>
+
+  <h5>Hello World</h5>
 
   <div class="code-container">
     <pre><code class="language-php">
-      &lt;?php
-      $color = "red";
-      echo "My car is " . $color . "&lt;br&gt;";
-      echo "My house is " . $COLOR . "&lt;br&gt;";
-      echo "My boat is " . $coLOR . "&lt;br&gt;";
-      ?&gt;
+        &lt;?php
+        echo "Hello, World!";
+        ?&gt;
     </code></pre>
-    <button class="copy-code-btn">COPY CODE</button>
-    <span class="copied-message">COPIED!</span>
+    <button class="copy-code-btn">Copy</button>
+  </div>
+
+  <h5> Database Connection File</h5>
+
+  <div class="code-container">
+    <pre><code class="language-php">
+
+        &lt;?php
+        $servername = "localhost";
+        $username = "your_username";
+        $password = "your_password";
+        $dbname = "your_database";
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // Set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Set charset to UTF-8
+            $conn->exec("SET NAMES utf8mb4");
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        ?&gt;
+        
+    </code></pre>
+    <button class="copy-code-btn">Copy</button>
   </div>
 
   <!-- Other content here -->
@@ -104,7 +109,6 @@
     codeContainers.forEach(container => {
       const codeElement = container.querySelector("code");
       const copyButton = container.querySelector(".copy-code-btn");
-      const copiedMessage = container.querySelector(".copied-message");
 
       copyButton.addEventListener("click", function() {
         const textArea = document.createElement("textarea");
@@ -114,12 +118,9 @@
         document.execCommand("copy");
         document.body.removeChild(textArea);
 
-        copyButton.classList.add("copied");
-        copiedMessage.style.display = "block";
-
+        copyButton.textContent = "Copied";
         setTimeout(() => {
-          copyButton.classList.remove("copied");
-          copiedMessage.style.display = "none";
+          copyButton.textContent = "Copy";
         }, 1500);
       });
     });
