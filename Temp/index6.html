@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/atom-one-dark.min.css">
   <style>
+
     body {
       background-color: #1a1e21;
       color: #c8c8c8;
@@ -49,7 +50,9 @@
     .copy-code-btn:hover {
       background-color: #333; /* Even darker grey color on hover */
     }
+
   </style>
+  
 </head>
 <body>
 
@@ -87,6 +90,23 @@
             echo "Connection failed: " . $e->getMessage();
         }
         ?&gt;
+        
+    </code></pre>
+    <button class="copy-code-btn">Copy</button>
+  </div>
+
+  <h6>SQL table create</table></h6>
+
+  <div class="code-container">
+    <pre><code class="language-sql">
+
+      CREATE TABLE my_table (
+        id INT PRIMARY KEY IDENTITY,
+        data1 VARCHAR(255) NOT NULL,
+        data2 VARCHAR(255) NOT NULL,
+        user_id INT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      );
         
     </code></pre>
     <button class="copy-code-btn">Copy</button>
