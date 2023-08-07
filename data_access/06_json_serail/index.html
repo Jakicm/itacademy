@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    var person = {};
+    person.id = 34;
+    person.firstName = "Ben";
+    person.lastName = "Lord";
+    person.address = {};
+    person.address.street = "Bos En Lommerweg 65";
+    person.address.zipCode = "1008 AG";
+    person.address.city = "Amsterdam";
+    person.adult = true;
+
+    person.showInfo = function(){
+                return firstName + " " + lastName;
+            }
+
+    var json = JSON.stringify(person);
+
+    console.log(json);
+
+
+    </script>
+</body>
+</html>

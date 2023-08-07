@@ -9,16 +9,33 @@
     <script>
                     var json = '{"countries":[{"countryCode":"sr","name":"Serbia","capital":"Belgrade","description":"Serbia is....."},{"countryCode":"fr","name":"France","capital":"Paris","description":"France is....."}]}';
  
-            var data = JSON.parse(json);
-            for (let i = 0; i < data.countries.length; i++) {
+            var data = JSON.parse(json);    // objekat
+            for (let i = 0; i < data.countries.length; i++) {     // prolazim kroz json COUNTRIES
                 document.body.innerHTML += 
-'<h2>' + data.countries[i].name + '</h2>'
+'<h2>' + data.countries[i].name + '</h2>'               // dodavanje elemenata
                 document.body.innerHTML += 
 '<p>Capital: ' + data.countries[i].capital + '</p>'
                 document.body.innerHTML +=
  '<p>Description: ' + data.countries[i].description + '</p>'
             }
 
+            /* A JSON string is defined and assigned to the variable json. The JSON string represents an object with a property countries, which is an 
+            array of country objects. Each country object has properties like countryCode, name, capital, and description.
+
+The JSON string is parsed using JSON.parse(json) and stored in the variable data. This converts the JSON string into a JavaScript object, 
+making it easier to access and manipulate its properties.
+
+A for loop is used to iterate through the countries array within the data object. The loop runs from i = 0 to i < data.countries.length, 
+which means it will loop through each country object in the array.
+
+Within the loop, the code appends HTML elements to the document.body. Specifically, it adds an <h2> element with the name of the country, 
+    a <p> element with the capital of the country, and another <p> element with the description of the country. The content of these elements is 
+        retrieved from the corresponding properties of each country object in the data object.
+
+The += operator is used to append the HTML elements to the innerHTML of the document.body, so each iteration adds new elements rather than 
+overwriting the previous ones.
+
+Once the loop completes, the code will have dynamically added HTML elements displaying information about each country to the web page. */
     </script>
 </body>
 </html>
