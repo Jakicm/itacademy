@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quill (Blotter) Example</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Quill CSS -->
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Quill (Blotter) Example</h2>
+    <div class="form-group">
+        <input type="text" class="form-control" id="quill-input" placeholder="Enter text...">
+    </div>
+    <div id="quill-toolbar">
+        <!-- Quill toolbar buttons will be added here -->
+    </div>
+</div>
+
+<!-- Include Quill JavaScript -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+    var quill = new Quill('#quill-input', {
+        theme: 'snow'
+    });
+
+    // Add Quill toolbar buttons to the specified element
+    var toolbar = new Quill('#quill-toolbar', {
+        modules: {
+            toolbar: [
+                [{ 'font': [] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link', 'image', 'video'],
+                ['clean']
+            ]
+        },
+        theme: 'snow'
+    });
+
+    // Sync the toolbar's content with the input field's content
+    quill.on('text-change', function() {
+        toolbar.clipboard.dangerouslyPasteHTML(quill.root.innerHTML);
+    });
+</script>
+
+</body>
+</html>
