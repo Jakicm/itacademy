@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "firebase": "^9.17.1",
+    "jquerry": "^0.0.1-security",
+    "jquery": "^3.7.1",
     "mysql": "^2.18.1"
   }
 }
