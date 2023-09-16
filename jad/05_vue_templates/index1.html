@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Vue direktive -->
+    
+    <div id="container">   
+        <img v-bind:src="thumb_url" alt="user profile picture">
+        <div v-text="name"></div>
+        <div v-html="email"></div>   <!-- omogucuje koriscenje HTML kod -->
+        <div v-text="balance"></div>
+    </div>
+
+    <script src="vue.js"></script>
+
+    <script>
+
+        var user = {
+            name: "milos jakic", 
+            email: "<i>miloshj@gmail.com<i>",
+            balance: 22353.93434,
+            thumb_url: "/img/sdg24bv2.png"
+        };
+
+        var vm = new Vue({
+        el: '#container',
+        data: user,
+      
+    })
+
+    </script>
+
+
+
+</body>
+</html>
