@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="container">
+
+        <user-component v-bind:user="user" v-on:say-hello="sayHello"></user-component>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+
+var data = {
+        user: {
+            name: "Ben Torrance",
+            email: "ben@email.com",
+            balance: 55353.93434
+        }
+    };
+ 
+    Vue.component('user-component', {
+        props: ['user'],
+        template: `<div class="user-container">
+                    <h3>{{ user.name }}</h3>
+                    <p v-text='user.email'></p>
+                    <p v-text='user.balance'></p>
+                    <button v-on:click="$emit('say-hello', user.name)">Say Hello</button>
+                </div>`
+ 
+    })
+ 
+    var vm = new Vue({
+        el: '#container',
+        data: data,
+        methods: {
+            sayHello: function (name) {  
+                alert(`Hello ${name}`);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="container">
+
+        <my-component v-for="user in users" v-bind:name="user.name" v-bind:key="user.id"></my-component>
+       
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+
+        Vue.component('my-component',{
+            props: ['name'],
+            template: '<div>Hello from {{name}}</div>',
+        
+        });
+
+        let vm = new Vue({
+            el: '#container',
+            data: {
+                users: [
+                    {id: 1, name: "Ben"},
+                    {id: 1, name: "John"},
+                    {id: 1, name: "Tom"},
+
+                    
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
