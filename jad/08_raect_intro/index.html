@@ -14,16 +14,17 @@
     
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-<script>
+<script type="text/babel">
  
     class App extends React.Component {
         render() {
-            return React.createElement('div', null, 'Hello World');
+            return <div>Hello for Shomy</div>;
         }
     }
  
-    ReactDOM.render(React.createElement(App), document.getElementById('container'))
+    ReactDOM.render(<App/>, document.getElementById('container'))
 
   
 </script>
